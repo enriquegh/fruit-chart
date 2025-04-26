@@ -1,0 +1,23 @@
+{
+  "name": "Bay Area Seasonal Produce",
+  "short_name": "Fruit Chart",
+  "description": "Track seasonal fruits and vegetables in the San Francisco Bay Area",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4caf50",
+  "icons": [
+    {
+      "src": "pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

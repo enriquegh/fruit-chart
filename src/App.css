@@ -1,0 +1,491 @@
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #ff9800;
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --light-gray: #e9ecef;
+  --gray: #6c757d;
+  --dark-gray: #343a40;
+  --fruits-color: #ff7043;
+  --vegetables-color: #66bb6a;
+  --border-radius: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Header Styles */
+.header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.header-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.view-toggle, .current-month {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.view-toggle.active, .view-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.month-selector {
+  position: relative;
+  margin-left: auto;
+}
+
+.month-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.month-dropdown button {
+  padding: 0.75rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-color);
+}
+
+.month-dropdown button:hover, .month-dropdown button.active {
+  background-color: var(--light-gray);
+  color: var(--primary-color);
+}
+
+/* Main Content */
+main {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Produce Card Styles */
+.produce-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 1400px) {
+  .produce-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1700px) {
+  .produce-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.produce-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.produce-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.produce-image-container {
+  height: 180px;
+  overflow: hidden;
+}
+
+.produce-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.produce-card:hover .produce-image {
+  transform: scale(1.05);
+}
+
+.produce-info {
+  padding: 1rem;
+}
+
+.produce-info h3 {
+  margin-bottom: 0.5rem;
+  color: var(--dark-gray);
+}
+
+.produce-description {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Month and Season View Styles */
+.produce-list {
+  margin-bottom: 2rem;
+}
+
+.produce-list h2 {
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.produce-list h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+/* Season View Styles */
+.season-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.season-selector button {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--light-gray);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.season-selector button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.season-title {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Calendar View Styles */
+.calendar-view {
+  padding: 1rem 0;
+}
+
+.produce-filter {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.produce-filter button {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--light-gray);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.produce-filter button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1400px) {
+  .items-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1700px) {
+  .items-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.calendar-item {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.calendar-item:hover {
+  transform: translateY(-3px);
+}
+
+.calendar-item .item-image-container {
+  height: 150px;
+  overflow: hidden;
+}
+
+.calendar-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-name {
+  padding: 0.75rem;
+  font-weight: bold;
+}
+
+.availability-strip {
+  display: flex;
+  height: 8px;
+}
+
+.availability-strip span {
+  height: 100%;
+  background-color: var(--light-gray);
+}
+
+.availability-strip span.available {
+  background-color: var(--primary-color);
+}
+
+.item-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.item-detail {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 769px) {
+  .item-detail-overlay {
+    position: static;
+    background-color: transparent;
+    display: block;
+    padding: 0;
+  }
+  
+  .item-detail {
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--gray);
+}
+
+.item-detail .item-image-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+
+.item-detail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-detail h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.item-detail p {
+  margin-bottom: 1.5rem;
+  color: var(--gray);
+}
+
+.season-months h4 {
+  margin-bottom: 0.5rem;
+  color: var(--dark-gray);
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .months-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.months-grid span {
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.months-grid span.in-season {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.months-grid span.off-season {
+  background-color: var(--light-gray);
+  color: var(--gray);
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-gray);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+footer p:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+/* For small screens */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .month-selector {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .current-month {
+    width: 100%;
+  }
+  
+  .month-dropdown {
+    width: 100%;
+  }
+  
+  .produce-grid, .items-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .calendar-item .item-image-container {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .produce-grid, .items-grid {
+    grid-template-columns: 1fr;
+  }
+}
